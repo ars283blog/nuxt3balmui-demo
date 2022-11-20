@@ -1,81 +1,54 @@
 <template>
-  <div>
-    <div class="home-page">
-      <h1>Hi! This is a simple Nuxt 3 app.</h1>
-      <h2>Click on the buttons below to check out a server route or an API route :) </h2>
-      <NuxtLink to="/hello" target="_blank">
-        <button> 
-            What Time Is It?
-        </button>
-      </NuxtLink>
-      <NuxtLink to="/api/hello" target="_blank">
-        <button>
-            Link to API Route
-        </button>
-      </NuxtLink>
-      <h2> Deploy Nuxt 3 app with universal rendering on Azure Static Web Apps using <NuxtLink to="https://docs.microsoft.com/azure/static-web-apps/deploy-nuxtjs" class="styling">the Microsoft documentation</NuxtLink></h2>
-    </div>
-    <NuxtWelcome />
+<div class="page-top-app-bar">
+  <ui-top-app-bar
+    content-selector="#content-main"
+    :type="type"
+    :title="title"
+    @nav="openDrawer = true"
+  >
+    <template #toolbar="{ toolbarItemClass }">
+      <ui-icon-button
+        :class="toolbarItemClass"
+        icon="file_download"
+      ></ui-icon-button>
+      <ui-icon-button :class="toolbarItemClass" icon="print"></ui-icon-button>
+      <ui-icon-button
+        :class="toolbarItemClass"
+        icon="bookmark"
+      ></ui-icon-button>
+    </template>
+  </ui-top-app-bar>
+
+  <ui-drawer v-model="openDrawer" type="modal">
+    <ui-drawer-header>
+      <ui-drawer-title>Header here</ui-drawer-title>
+    </ui-drawer-header>
+    <ui-drawer-content>
+      <ui-list>
+        <ui-item active>
+          <ui-item-first-content>
+            <ui-icon>arrow_back</ui-icon>
+          </ui-item-first-content>
+          <ui-item-text-content>Back</ui-item-text-content>
+        </ui-item>
+        <ui-list-divider></ui-list-divider>
+      </ui-list>
+    </ui-drawer-content>
+  </ui-drawer>
+
+  <div id="content-main">
+    <p v-for="i in 36" :key="i">Content {{ i }}</p>
   </div>
+</div>
 </template>
-<style>
-  .home-page{
-    margin: 5px;
-    margin-bottom: 0;
-    padding: 20px;
-    padding-top: 0;
-    padding-bottom: 0;
+<script>
+export default {
+  data() {
+    return {
+      type: 0,
+      title: 'Hello BalmUI',
+      openDrawer: false
+    };
   }
-
-  .styling{
-    color: rgb(29, 199, 128);
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  .styling:hover{
-    cursor: pointer;
-    color: rgb(18, 168, 106);
-    font-weight: 500;
-    text-decoration: underline;
-    transition: 0.2s ease-in-out;
-
-  }
-
-  .home-page h1{
-    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
-    font-weight: 500;
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-
-  .home-page h2{
-    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 2rem;
-  }
-
-  button {
-    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
-    font-weight: 500;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    color: white;
-    background-color: rgb(42, 219, 145);
-    padding: 10px 30px 10px 30px;
-    margin: 0px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 5px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-
-  button:hover{
-    cursor: pointer;
-    background-color: rgb(29, 199, 128);
-    transition: 0.2s ease-in;
-  }
-</style>
+};
+</script>
